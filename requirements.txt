@@ -2,4 +2,4 @@ scikit-learn
 pyyaml
 joblib
 pre-commit
-ruf
+ruff
