@@ -29,7 +29,7 @@ jobs:
 
       - name: Push to Hugging Face Space
         env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_TOKEN: ${{ secrets.TOKENTOKEN }}
           HF_USER: nedinislam
           SPACE_NAME: iris-api-alipkachev
         run: |
@@ -38,7 +38,9 @@ jobs:
 
           rm -rf space_repo
 
-          git clone https://hf_token:${HF_TOKEN}@huggingface.co/spaces/${HF_USER}/${SPACE_NAME} space_repo
+          echo "Token length: ${#HF_TOKEN}"
+
+          git clone https://user:${HF_TOKEN}@huggingface.co/spaces/${HF_USER}/${SPACE_NAME} space_repo
 
           mkdir -p space_repo/src
           mkdir -p space_repo/models
@@ -63,7 +65,7 @@ jobs:
 
           git commit -m "Automatic deploy from GitHub Actions"
 
-          git remote set-url origin https://hf_token:${HF_TOKEN}@huggingface.co/spaces/${HF_USER}/${SPACE_NAME}
+          git remote set-url origin https://user:${HF_TOKEN}@huggingface.co/spaces/${HF_USER}/${SPACE_NAME}
 
           git remote -v
 
