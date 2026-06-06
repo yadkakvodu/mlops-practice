@@ -31,9 +31,12 @@ jobs:
         run: dvc pull
 
       - name: Train model
+
         run: dvc repro
 
       - name: Create report
+
+
         run: |
           echo "## Результаты эксперимента" > report.md
           echo "### Изменения параметров" >> report.md
