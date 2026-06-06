@@ -45,7 +45,9 @@ jobs:
           mkdir -p space_repo/src
           mkdir -p space_repo/models
 
+          cp src/app.py space_repo/app.py
           cp -r src/* space_repo/src/
+
           cp -r models/* space_repo/models/
 
           [ -f requirements.txt ] && cp requirements.txt space_repo/
