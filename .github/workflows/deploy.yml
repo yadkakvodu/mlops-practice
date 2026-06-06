@@ -15,8 +15,8 @@ jobs:
       # 2. Скачиваем модель из DVC хранилища
       - name: Pull Model from DVC
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.NAMENAME }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET }}
         run: |
           pip install dvc dvc-s3
           dvc pull
