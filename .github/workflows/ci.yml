@@ -25,8 +25,8 @@ jobs:
 
       - name: Загрузка данных через DVC (из Cloud.ru)
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.namename }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.secret }}
         run: dvc pull
 
       - name: Запуск тестов
