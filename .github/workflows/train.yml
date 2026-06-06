@@ -2,7 +2,7 @@ name: Train and Report (CML)
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 permissions:
   pull-requests: write
@@ -11,40 +11,40 @@ permissions:
 jobs:
   run-experiment:
     runs-on: ubuntu-latest
+
     steps:
-      # fetch-depth: 0 нужен, чтобы DVC мог сравнить текущую ветку с историей main
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-          cache: 'pip'
+          python-version: "3.11"
 
-      - name: Setup CML
-      - uses: iterative/setup-cml@v3
-      - name: Установка зависимостей
-        run: pip install -r requirements.txt
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install cml
 
-      - name: Загрузка данных
+      - name: Download data
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.namename }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.secret }}
         run: dvc pull
 
-      - name: Воспроизведение пайплайна (обучение)
+      - name: Train model
         run: dvc repro
 
-      - name: Создание отчета CML
+      - name: Create CML report
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           echo "## Результаты эксперимента" > report.md
-          echo "### Изменения параметров:" >> report.md
+
+          echo "### Изменения параметров" >> report.md
           dvc params diff main --md >> report.md
-          echo "### Изменения метрик:" >> report.md
+
+          echo "### Изменения метрик" >> report.md
           dvc metrics diff main --md >> report.md
-          
-          # Отправка отчета в Pull Request
+
           cml comment create report.md
