@@ -5,7 +5,9 @@ import joblib
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "models", "model.pkl")
+
+# src/app.py -> ../models/model.pkl
+MODEL_PATH = os.path.join(BASE_DIR, "..", "models", "model.pkl")
 
 model = joblib.load(MODEL_PATH)
 
