@@ -1,4 +1,6 @@
 [core]
-    remote = myremote
-['remote "myremote"']
-    url = ../../dvc_storage
+    remote = cloudru
+['remote "cloudru"']
+    url = s3://bucket-d98227/dvc_data
+    endpointurl = https://s3.cloud.ru
+    region = ru-central-1
